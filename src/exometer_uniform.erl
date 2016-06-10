@@ -55,7 +55,7 @@ probe_init(Name, _Type, Options) ->
 
     %% Setup random seed, if not already done.
     case get(random_seed) of
-        undefined -> random:seed(now());
+        undefined -> random:seed(time_compat:timestamp());
         _ -> true
     end,
     {ok, St#st{ ets_ref = EtsRef }}.
