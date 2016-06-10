@@ -11,31 +11,31 @@ all: deps compile xref test
 ci: compile xref dialyzer test
 
 deps:
-	rebar get-deps
+	./rebar get-deps
 
 compile:
-	rebar compile
+	./rebar compile
 
 clean: clean_plt
-	rebar clean
+	./rebar clean
 
 clean-all: clean
 	rm -rf deps
 
 test:
-	ERL_LIBS=./examples rebar ct skip_deps=true
+	ERL_LIBS=./examples ./rebar ct skip_deps=true
 
 xref:
-	ERL_LIBS=./deps rebar xref skip_deps=true
+	ERL_LIBS=./deps ./rebar xref skip_deps=true
 
 edown_deps:
-	rebar get-deps compile edown=true
+	./rebar get-deps compile edown=true
 
 doc: edown_deps
-	rebar doc edown=true skip_deps=true
+	./rebar doc edown=true skip_deps=true
 
 $(EXOMETER_PLT):
-	rebar get-deps compile
+	./rebar get-deps compile
 	ERL_LIBS=deps dialyzer --build_plt --output_plt $(EXOMETER_PLT) \
 	--apps $(DIALYZER_APPS)
 
